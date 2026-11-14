@@ -1,0 +1,13 @@
+{
+  "name": "top10-football-quiz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TOP 10 football quiz game",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
