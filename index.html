@@ -41,6 +41,15 @@
   <style>
     .players-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 8px}.player-field{display:flex;flex-direction:column;gap:5px;min-width:0}.player-field label{font-size:12px;color:var(--muted)}.player-field input{width:100%;min-width:0;border:1px solid #52677a;background:#1a2938;color:var(--text);outline:0;border-radius:12px;padding:11px 13px;font:inherit;font-size:13px}.player-field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #8ab9d822}.player-field input::placeholder{color:#9eafbb}.name-note,.name-error{font-size:11px!important;margin:0 0 14px!important}.name-error{color:#efb3a7!important}.setup-start:disabled{opacity:.55;cursor:not-allowed;transform:none}.room-access{display:flex;align-items:center;gap:7px}.room-choice,.room-copy{border:1px solid var(--line);border-radius:11px;background:#1b2b39;color:var(--muted);padding:9px 12px;font-size:11px}.room-choice[aria-pressed="true"]{background:#344657;color:var(--gold);border-color:#887d5c}.room-lobby{margin-top:16px;padding:15px;border:1px solid #617854;background:#293b37;border-radius:15px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}.room-lobby>div{display:grid;gap:2px}.room-lobby>div span{color:var(--muted);font-size:11px}.room-lobby>div strong{font-size:24px;letter-spacing:.14em;color:var(--gold)}.room-lobby p{width:100%;margin:0!important;font-size:12px!important;color:#c8d7c4!important}.room-copy{margin-right:auto;color:var(--text);background:#354c48}.room-banner{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding:8px 11px;border-radius:11px;background:#283e42;color:#c7d5cc;font-size:11px}.room-banner strong{color:var(--gold);letter-spacing:.1em;margin-inline-start:5px}.room-banner span+span{color:var(--muted)}[hidden]{display:none!important}@media(max-width:500px){.players-grid{grid-template-columns:1fr}.room-access{flex-wrap:wrap}}
   </style>
+<style>
+    .million-launch{display:flex;flex-direction:column;align-items:flex-start;gap:3px;width:100%;margin-top:12px;border:1px solid var(--teal);border-radius:14px;background:#2c3d4d;color:var(--text);padding:13px 16px;text-align:right}.million-launch strong{font-size:15px;color:var(--gold)}.million-launch span{font-size:11px;color:var(--muted)}.million-launch:hover{background:#354653}
+    .million{padding:clamp(22px,5vw,38px);margin-bottom:18px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(37,53,70,.98),rgba(29,43,58,.98));border-radius:24px;box-shadow:0 22px 60px #07101355}.million [hidden],.million[hidden]{display:none!important}
+    .m-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin:12px 0 8px}.m-top b,.q-label b{color:var(--gold)}.m-time{min-width:48px;text-align:center;border:1px solid var(--line);border-radius:12px;padding:3px 8px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums}.m-time.warn{color:var(--coral);border-color:var(--coral)}
+    .m-bar{height:6px;border-radius:6px;background:#1b2b39;overflow:hidden}.m-bar i{display:block;height:100%;width:100%;background:var(--teal);transition:width 1s linear}
+    .m-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}@media(max-width:560px){.m-opts{grid-template-columns:1fr}}
+    .m-opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;background:#1b2b39;color:var(--text);padding:13px 14px;text-align:right;font-size:14px}.m-opt b{flex:none;width:26px;height:26px;border-radius:9px;background:#2b4054;color:var(--gold);display:grid;place-items:center;font-size:12px}.m-opt:hover:not(:disabled){border-color:var(--teal)}.m-opt.ok{background:#2e5a45;border-color:#6fcf97}.m-opt.bad{background:#5a3040;border-color:var(--coral)}.m-opt:disabled{cursor:default}
+    .m-note{font-size:11px;color:var(--muted);margin:14px 0 0}.m-end h2{margin:6px 0}.m-final{font-size:34px;font-weight:800;color:var(--gold);margin:6px 0 18px}
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -62,6 +71,7 @@
       <p id="nameError" class="name-error" role="alert" hidden>أدخل اسم اللاعب للمتابعة.</p>
       <p id="deckNotice" role="status" hidden>استخدمت كل الأسئلة الجديدة المتاحة في هذا التصفح.</p>
       <button class="setup-start" id="startGame" type="button">ابدأ اللعب ←</button>
+      <button class="million-launch" id="millionLaunch" type="button"><strong>🏆 طور المليون</strong><span>10 أسئلة من المتوسط إلى الصعب · 30 ثانية لكل سؤال · وسيلة مساعدة واحدة</span></button>
       <div class="room-lobby" id="roomLobby" hidden><div><span id="roomLobbyTitle">رمز الغرفة</span><strong id="createdRoomCode" dir="ltr">------</strong></div><button class="room-copy" id="copyRoomCode" type="button" aria-label="نسخ رمز الغرفة">نسخ الرمز</button><p id="lobbyStatus" role="status">بانتظار اللاعب الثاني…</p></div>
     </section>
     <main class="layout" id="gameLayout" hidden>
@@ -80,6 +90,18 @@
       </section>
       <aside class="side summary" id="summary"><h2>ملخّص الجولة</h2><p id="roundStatus">جولة كروية متنوعة</p><div class="scorebox"><div class="scoreline"><span id="scoreLabel">مجموع النقاط</span><span class="score" id="score">٠</span></div><div class="progress"><i id="progress"></i></div></div><div class="roundscore">أكملت <strong id="completedCount">٠</strong> من <span id="roundTotal">٠</span> أسئلة</div><button class="next-question" id="playAgain" type="button">العودة للبداية ↻</button></aside>
     </main>
+    <section class="million" id="million" hidden aria-labelledby="mTitle">
+      <div class="eyebrow"><span class="dot"></span> حنكة كروية · طور المليون</div>
+      <div id="mPlay">
+        <div class="m-top"><span>السؤال <b id="mNum">١</b> من ١٠</span><span>نقاطك <b id="mWon">٠</b></span><span class="m-time" id="mTime">30</span></div>
+        <div class="m-bar"><i id="mBar"></i></div>
+        <div class="question"><div class="q-label"><span id="mLevel">سهل</span><span>قيمة السؤال <b id="mPrize"></b></span></div><div class="q-text" id="mQ"></div></div>
+        <div class="m-opts" id="mOpts"></div>
+        <div class="actions"><button class="skip-question" id="mLife" type="button">🔄 تغيير السؤال (مرة واحدة)</button><button class="skip-question" id="mMute" type="button">🔊 الصوت</button><button class="next-question" id="mQuit" type="button">انسحاب بنقاطي</button></div>
+        <p class="m-note">نقطتا أمان: عند إكمال السؤال ٥ والسؤال ٨. الإجابة الخاطئة أو انتهاء الوقت تعيدك لآخر نقطة أمان.</p>
+      </div>
+      <div id="mEnd" class="m-end" hidden><h2 id="mTitle">النتيجة</h2><p id="mMsg"></p><div class="m-final" id="mFinal"></div><div class="actions"><button class="setup-start" id="mAgain" type="button">العب مرة أخرى ↻</button><button class="next-question" id="mBack" type="button">رجوع للقائمة</button></div></div>
+    </section>
     <footer class="footer">فكّر، خمّن، واكتشف — على مهلك 🌿</footer>
   </div>
   <script>
@@ -735,6 +757,189 @@
       try{const saved=JSON.parse(sessionStorage.getItem(roomSessionKey)||'null');if(saved?.code&&saved?.token){room=saved;selectedMode='duo';$('playerOneName').value=saved.name||'';chooseMode('duo');roomRevision=-1;lastRoomEventRevision=0;roomSetupWaiting(saved.code,'جارٍ استعادة الغرفة…');beginRoomPolling()}}catch(_){}
     })();
   </script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const BANK={
+easy:[["أي دولة فازت بكأس العالم 2022؟", "الأرجنتين", "فرنسا", "البرازيل", "كرواتيا"],
+["كم لاعباً يشكّل الفريق داخل الملعب في كرة القدم؟", "11", "10", "9", "12"],
+["في أي دولة أُقيمت كأس العالم 2018؟", "روسيا", "ألمانيا", "البرازيل", "جنوب أفريقيا"],
+["أي نادٍ يلعب على ملعب سانتياغو برنابيو؟", "ريال مدريد", "برشلونة", "أتلتيكو مدريد", "إشبيلية"],
+["ما لون بطاقة الطرد في كرة القدم؟", "الأحمر", "الأصفر", "الأزرق", "الأخضر"],
+["كم دقيقة مدة المباراة الرسمية دون الوقت بدل الضائع؟", "90", "80", "100", "120"],
+["أي منتخب يُلقّب بالساموراي الأزرق؟", "اليابان", "كوريا الجنوبية", "الصين", "أستراليا"],
+["أي دولة فازت بأكبر عدد من ألقاب كأس العالم للرجال؟", "البرازيل", "ألمانيا", "إيطاليا", "الأرجنتين"],
+["ما لون بطاقة الإنذار في كرة القدم؟", "الأصفر", "الأحمر", "الأخضر", "الأزرق"],
+["من أي دولة النجم محمد صلاح؟", "مصر", "المغرب", "الجزائر", "السنغال"],
+["أي نادٍ يلعب على ملعب أنفيلد؟", "ليفربول", "مانشستر يونايتد", "تشيلسي", "أرسنال"],
+["ما لون قميص منتخب البرازيل الأساسي؟", "الأصفر", "الأزرق", "الأخضر", "الأبيض"],
+["أي نادٍ يُلقّب بالبلوغرانا؟", "برشلونة", "ريال مدريد", "فالنسيا", "إشبيلية"],
+["من أي دولة اللاعب كيليان مبابي؟", "فرنسا", "بلجيكا", "هولندا", "إسبانيا"],
+["كم عدد الحكام الرئيسيين داخل أرض الملعب في المباراة؟", "واحد", "اثنان", "ثلاثة", "أربعة"],
+["أي دولة استضافت كأس العالم 2022؟", "قطر", "الإمارات", "السعودية", "الكويت"],
+["من الدول المستضيفة لكأس العالم 2026؟", "الولايات المتحدة وكندا والمكسيك", "السعودية وقطر والإمارات", "إسبانيا والبرتغال والمغرب", "ألمانيا وفرنسا وإيطاليا"],
+["من يُلقّب بالفرعون المصري في كرة القدم؟", "محمد صلاح", "محمود تريزيغيه", "محمد النني", "مصطفى محمد"],
+["كم عدد حراس المرمى لكل فريق داخل أرض الملعب؟", "واحد", "اثنان", "ثلاثة", "لا يوجد عدد محدد"],
+["أي دولة استضافت كأس العالم 2014؟", "البرازيل", "جنوب أفريقيا", "روسيا", "ألمانيا"],
+["أي منتخب فاز بكأس العالم 2010؟", "إسبانيا", "هولندا", "ألمانيا", "أوروغواي"],
+["أي نادٍ إنجليزي يُلقّب بالسيتيزنز؟", "مانشستر سيتي", "ليفربول", "وست هام", "إيفرتون"],
+["أي منتخب فاز بكأس العالم 1998؟", "فرنسا", "البرازيل", "إيطاليا", "كرواتيا"],
+["أي منتخب فاز بكأس العالم 2026؟", "إسبانيا", "الأرجنتين", "فرنسا", "إنجلترا"]],
+mid:[["من هو الهداف التاريخي لدوري أبطال أوروبا؟", "كريستيانو رونالدو", "ليونيل ميسي", "روبرت ليفاندوفسكي", "كريم بنزيما"],
+["أي نادٍ فاز بدوري أبطال أوروبا أكثر من غيره؟", "ريال مدريد", "ميلان", "ليفربول", "بايرن ميونخ"],
+["في أي عام أُقيمت أول بطولة لكأس العالم؟", "1930", "1934", "1950", "1926"],
+["من فاز بجائزة الكرة الذهبية لعام 2023؟", "ليونيل ميسي", "إيرلينغ هالاند", "كيليان مبابي", "كيفن دي بروين"],
+["أي منتخب عربي بلغ نصف نهائي كأس العالم 2022؟", "المغرب", "السعودية", "تونس", "قطر"],
+["أي منتخب فاز ببطولة أمم أوروبا 2020 التي أُقيمت عام 2021؟", "إيطاليا", "إنجلترا", "إسبانيا", "فرنسا"],
+["أي نادٍ فاز بالدوري الإنجليزي موسم 2003-2004 دون أي هزيمة؟", "أرسنال", "تشيلسي", "مانشستر يونايتد", "ليفربول"],
+["في أي دولة يقع نادي بنفيكا؟", "البرتغال", "إسبانيا", "إيطاليا", "فرنسا"],
+["كم مرة فاز ميسي بالكرة الذهبية حتى عام 2023؟", "ثماني مرات", "سبع مرات", "ست مرات", "تسع مرات"],
+["من أصغر لاعب سجّل هدفاً في نهائي كأس العالم؟", "بيليه", "كيليان مبابي", "دييغو مارادونا", "رونالدو الظاهرة"],
+["من فاز بالحذاء الذهبي في كأس العالم 2026؟", "كيليان مبابي", "ليونيل ميسي", "إيرلينغ هالاند", "هاري كين"],
+["أي منتخب عربي تأهل لكأس العالم لأول مرة في تاريخه عام 2026؟", "الأردن", "السعودية", "مصر", "المغرب"],
+["أي منتخب فاز بكأس العرب 2025؟", "المغرب", "الأردن", "السعودية", "الإمارات"],
+["أي نادٍ فاز بدوري أبطال أوروبا موسم 2025-2026؟", "باريس سان جيرمان", "أرسنال", "بايرن ميونخ", "ريال مدريد"],
+["أي نادٍ فاز بالدوري الإنجليزي الممتاز موسم 2025-2026؟", "أرسنال", "مانشستر سيتي", "ليفربول", "تشيلسي"],
+["من فاز بجائزة الكرة الذهبية لعام 2025؟", "عثمان ديمبيلي", "لامين يامال", "فيتينيا", "محمد صلاح"],
+["من الهداف التاريخي لكأس العالم بعد نسخة 2026؟", "كيليان مبابي", "ميروسلاف كلوزه", "ليونيل ميسي", "رونالدو الظاهرة"],
+["أي منتخب فاز ببطولة أمم أوروبا 2024؟", "إسبانيا", "إنجلترا", "فرنسا", "ألمانيا"],
+["أي منتخب فاز بكوبا أمريكا 2024؟", "الأرجنتين", "كولومبيا", "البرازيل", "أوروغواي"],
+["أي منتخب فاز على الأردن في نهائي كأس آسيا 2023؟", "قطر", "اليابان", "كوريا الجنوبية", "إيران"],
+["كم منتخباً شارك في كأس العالم 2026؟", "48", "32", "40", "64"],
+["أي من هؤلاء اللاعبين لم يفز بكأس العالم؟", "كريستيانو رونالدو", "ليونيل ميسي", "كيليان مبابي", "أنطوان غريزمان"],
+["أي من هذه الأندية لم يفز بدوري أبطال أوروبا؟", "أرسنال", "ليفربول", "تشيلسي", "مانشستر يونايتد"],
+["أي من هذه المنتخبات لم يفز بكأس العالم؟", "هولندا", "إسبانيا", "فرنسا", "الأرجنتين"],
+["كم مرة فازت ألمانيا بكأس العالم للرجال؟", "4", "3", "5", "6"],
+["كم دقيقة مدة كل شوط إضافي في كرة القدم؟", "15", "10", "20", "30"],
+["كم مرة فازت الأرجنتين بكأس العالم للرجال؟", "3", "2", "4", "5"],
+["ما اسم الجائزة التي تُمنح لأفضل حارس مرمى في كأس العالم؟", "القفاز الذهبي", "الحذاء الذهبي", "الكرة الذهبية", "كأس ياشين"],
+["ما اللقب الشائع لكأس دوري أبطال أوروبا؟", "ذات الأذنين الكبيرتين", "كأس جول ريميه", "كأس هنري دولوني", "الكأس الذهبية"],
+["كم مرة فاز مانشستر يونايتد بدوري أبطال أوروبا؟", "3", "2", "4", "5"]],
+hard:[["من المدرب الذي قاد ليستر سيتي للفوز بالدوري الإنجليزي موسم 2015-2016؟", "كلاوديو رانييري", "بريندان رودجرز", "نايجل بيرسون", "كريغ شكسبير"],
+["في أي عام فازت اليونان ببطولة أمم أوروبا؟", "2004", "2008", "2000", "2012"],
+["من فاز بالحذاء الذهبي في كأس العالم 2018؟", "هاري كين", "كيليان مبابي", "أنطوان غريزمان", "روميلو لوكاكو"],
+["ما اسم ملعب نادي بوروسيا دورتموند؟", "سيغنال إيدونا بارك", "فيلتينس أرينا", "فيزر شتاديون", "أوليمبيا شتاديون"],
+["أي منتخب فاز بأول بطولة لأمم أوروبا عام 1960؟", "الاتحاد السوفيتي", "إسبانيا", "ألمانيا الغربية", "يوغوسلافيا"],
+["من سجّل هاتريك في نهائي كأس العالم 2022؟", "كيليان مبابي", "ليونيل ميسي", "جوليان ألفاريز", "أوليفييه جيرو"],
+["من الحارس الذي فاز بجائزة ياشين الأولى عام 2019؟", "أليسون بيكر", "مانويل نوير", "تيبو كورتوا", "جان أوبلاك"],
+["أي منتخب فاز بكأس أمم أفريقيا 2023 التي أُقيمت عام 2024؟", "ساحل العاج", "نيجيريا", "السنغال", "مصر"],
+["من صاحب الرقم القياسي لأكثر الأهداف في موسم من 38 مباراة بالدوري الإنجليزي؟", "إيرلينغ هالاند", "محمد صلاح", "هاري كين", "لويس سواريز"],
+["أي نادٍ فاز بدوري أبطال أوروبا موسم 2018-2019؟", "ليفربول", "توتنهام", "ريال مدريد", "برشلونة"],
+["في أي ملعب أُقيم نهائي كأس العالم 2022؟", "ملعب لوسيل", "ملعب البيت", "ملعب خليفة الدولي", "ملعب 974"],
+["من المدرب الذي قاد إيطاليا للفوز بكأس العالم 2006؟", "مارتشيلو ليبي", "فابيو كابيلو", "كارلو أنشيلوتي", "روبرتو مانشيني"],
+["أي نادٍ فاز بدوري المؤتمر الأوروبي في نسخته الأولى 2021-2022؟", "روما", "فينورد", "وست هام", "ليستر سيتي"],
+["كم هدفاً سجّل ميروسلاف كلوزه في كأس العالم؟", "16", "15", "14", "13"],
+["من سجّل هدف الفوز لإسبانيا في نهائي كأس العالم 2026؟", "فيران توريس", "ميكيل ميرينو", "رودري", "لامين يامال"],
+["أي منتخب احتل المركز الثالث في كأس العالم 2026؟", "إنجلترا", "فرنسا", "بلجيكا", "البرتغال"],
+["من سجّل أول هدف للأردن في تاريخ كأس العالم؟", "علي علوان", "موسى التعمري", "يزن النعيمات", "نزار الرشدان"],
+["ما نتيجة نهائي كأس العرب 2025 بين المغرب والأردن؟", "3-2 بعد التمديد", "2-1", "1-0", "4-3 بركلات الترجيح"],
+["كيف حُسم نهائي دوري أبطال أوروبا 2025-2026 بين باريس وأرسنال؟", "بركلات الترجيح", "هدف ذهبي", "بنتيجة 2-0", "بهدف في الوقت بدل الضائع"],
+["أي نادٍ فاز بالدوري الأوروبي موسم 2025-2026؟", "أستون فيلا", "روما", "توتنهام", "مانشستر يونايتد"],
+["كم هدفاً سجّل مبابي في كأس العالم 2026؟", "10", "8", "9", "7"],
+["في أي ملعب أُقيم نهائي كأس العالم 2026؟", "ملعب ميتلايف", "ملعب روز بول", "ملعب أزتيكا", "ملعب سوفي"],
+["من الهداف التاريخي للدوري الإنجليزي الممتاز؟", "آلان شيرر", "هاري كين", "واين روني", "أندي كول"],
+["كم مرة فاز ريال مدريد بدوري أبطال أوروبا؟", "15", "14", "13", "16"],
+["من مدرب منتخب الأردن في كأس العالم 2026؟", "جمال سلامي", "هيرفي رينار", "وليد الركراكي", "طارق السكتيوي"],
+["كم هدفاً سجّل علي علوان في نهائي كأس العرب 2025؟", "هدفين", "هدفاً واحداً", "ثلاثة أهداف", "لم يسجّل"],
+["كم هدفاً سجّل أوليغ سالينكو في مباراة واحدة بكأس العالم 1994؟", "5", "4", "6", "3"],
+["أي منتخب فاز بأول نسخة من كأس آسيا عام 1956؟", "كوريا الجنوبية", "إيران", "إسرائيل", "اليابان"],
+["في أي عام فازت الدنمارك ببطولة أمم أوروبا؟", "1992", "1988", "1996", "2000"],
+["من أول لاعب فاز بجائزة الكرة الذهبية عام 1956؟", "ستانلي ماثيوز", "ألفريدو دي ستيفانو", "بيليه", "ريمون كوبا"],
+["كم هدفاً سجّل الألماني غيرد مولر في كأس العالم؟", "14", "13", "16", "12"],
+["من فاز بالحذاء الذهبي في كأس العالم 2014؟", "خاميس رودريغيز", "ليونيل ميسي", "توماس مولر", "نيمار"],
+["من فاز بجائزة الكرة الذهبية لعام 2018؟", "لوكا مودريتش", "كريستيانو رونالدو", "كيليان مبابي", "محمد صلاح"],
+["أي منتخب فاز بكأس العالم 1966؟", "إنجلترا", "ألمانيا الغربية", "البرازيل", "الأرجنتين"],
+["أي من هؤلاء المدربين لم يفز بدوري أبطال أوروبا؟", "أرسين فينجر", "يورغن كلوب", "كارلو أنشيلوتي", "بيب غوارديولا"],
+["كم مرة فاز ليفربول بدوري أبطال أوروبا؟", "6", "5", "7", "4"],
+["كم مرة فاز ميلان بدوري أبطال أوروبا؟", "7", "6", "5", "8"],
+["كم مرة فاز بايرن ميونخ بدوري أبطال أوروبا؟", "6", "5", "7", "4"],
+["من اللاعب الألماني الذي فاز بكأس العالم لاعباً ثم مدرباً؟", "فرانتس بيكنباور", "يورغن كلينسمان", "يواكيم لوف", "رودي فولر"],
+["من المدرب الذي فاز بكأس العالم لاعباً عام 1998 ومدرباً عام 2018؟", "ديدييه ديشان", "زين الدين زيدان", "لوران بلان", "ريمون دومينيك"],
+["من أول حارس مرمى فاز بجائزة الكرة الذهبية؟", "ليف ياشين", "دينو زوف", "غوردون بانكس", "بيتر شمايكل"],
+["من مدرب إسبانيا الذي فاز معها ببطولة أمم أوروبا 2008؟", "لويس أراغونيس", "فيسنتي ديل بوسكي", "لويس إنريكي", "خوليان لوبيتيغي"],
+["في أي ملعب أُقيم نهائي كأس العالم 1986؟", "ملعب الأزتيكا", "روز بول", "ماراكانا", "ويمبلي"],
+["ما اسم كأس بطولة أمم أوروبا؟", "كأس هنري دولوني", "كأس جول ريميه", "كأس دي ستيفانو", "كأس بوشكاش"],
+["أي جائزة تُمنح لأفضل لاعب شاب ضمن الكرة الذهبية؟", "كأس كوبا", "جائزة ياشين", "كأس جيرد مولر", "جائزة بوشكاش"],
+["من فاز بجائزة الكرة الذهبية لعام 2007؟", "كاكا", "ليونيل ميسي", "كريستيانو رونالدو", "ديدييه دروغبا"],
+["كم هدفاً سجّل رونالدو الظاهرة في كأس العالم؟", "15", "16", "14", "13"],
+["من فاز بالحذاء الذهبي في كأس العالم 2010؟", "توماس مولر", "دييغو فورلان", "ويسلي شنايدر", "دافيد فيا"],
+["ما نتيجة نهائي كأس العالم 2022 بعد الوقت الأصلي والإضافي وقبل ركلات الترجيح؟", "3-3", "2-2", "2-1", "4-2"],
+["من الحكم الذي أدار نهائي كأس العالم 2022؟", "شيمون مارتشينياك", "بيير لويجي كولينا", "مايكل أوليفر", "أنطونيو ماتيو لاهوز"],
+["أي نادٍ فاز بكأس العالم للأندية 2025؟", "تشيلسي", "باريس سان جيرمان", "ريال مدريد", "بايرن ميونخ"],
+["ما نتيجة نهائي كأس العالم للأندية 2025 بين تشيلسي وباريس سان جيرمان؟", "3-0", "2-0", "2-1", "4-1"],
+["أي من هؤلاء اللاعبين لم يفز بجائزة الكرة الذهبية؟", "تييري هنري", "ريفالدو", "رونالدينيو", "كاكا"],
+["أي من هذه الدول لم تستضف كأس العالم؟", "هولندا", "إيطاليا", "إسبانيا", "ألمانيا"],
+["أي من هذه الأندية لم يفز بالدوري الإنجليزي الممتاز؟", "توتنهام", "ليستر سيتي", "بلاكبيرن", "تشيلسي"],
+["أي من هؤلاء الحراس لم يفز بكأس العالم؟", "أوليفر كان", "مانويل نوير", "إيكر كاسياس", "جيجي بوفون"],
+["أي من هؤلاء المدربين لم يفز بكأس العالم؟", "كارلو أنشيلوتي", "ديدييه ديشان", "فيسنتي ديل بوسكي", "ليونيل سكالوني"],
+["أي من هذه المنتخبات لم يصل إلى نهائي كأس العالم قط؟", "بلجيكا", "هولندا", "كرواتيا", "السويد"],
+["أي من هؤلاء لم يفز بالحذاء الذهبي في كأس العالم؟", "ليونيل ميسي", "ميروسلاف كلوزه", "هاري كين", "كيليان مبابي"],
+["أي من هؤلاء اللاعبين لم يلعب مع ريال مدريد؟", "ليونيل ميسي", "لويس فيغو", "زين الدين زيدان", "ديفيد بيكهام"],
+["من اللاعب الذي فاز بدوري أبطال أوروبا مع ثلاثة أندية مختلفة؟", "كلارنس سيدورف", "كريستيانو رونالدو", "زلاتان إبراهيموفيتش", "باتريس إيفرا"],
+["كم مباراة يلعبها أي منتخب يبلغ النهائي في كأس العالم 2026 بنظام 48 منتخباً؟", "8", "7", "9", "6"],
+["كم مباراة أُقيمت في كأس العالم 2026 بالمجمل؟", "104", "64", "96", "128"],
+["كم هدفاً سجّل بيليه في كأس العالم؟", "12", "14", "15", "10"],
+["كم مرة فاز برشلونة بدوري أبطال أوروبا؟", "5", "4", "6", "7"],
+["كم مرة فاز أياكس بدوري أبطال أوروبا؟", "4", "3", "5", "2"],
+["كم هدفاً سجّل ميسي في كأس العالم 2022؟", "7", "6", "8", "5"],
+["كم هدفاً سُجّل في مباراة المركز الثالث بين إنجلترا وفرنسا في كأس العالم 2026؟", "10", "8", "9", "7"],
+["كم منتخباً شارك في أول كأس عالم عام 1930؟", "13", "16", "12", "8"],
+["ما اسم الكأس الأصلية لكأس العالم التي احتفظت بها البرازيل نهائياً؟", "كأس جول ريميه", "كأس فيفا", "كأس هنري دولوني", "كأس بيليه"],
+["أي جائزة تمنحها فيفا لأجمل هدف في العام؟", "جائزة بوشكاش", "جائزة ياشين", "كأس كوبا", "كأس جيرد مولر"],
+["أي منتخب فاز بكأس القارات عام 1992؟", "الأرجنتين", "السعودية", "كوت ديفوار", "الولايات المتحدة"],
+["أي منتخب فاز بأول كأس عالم للسيدات عام 1991؟", "الولايات المتحدة", "النرويج", "ألمانيا", "الصين"]]};
+const PRIZES=[100,200,300,500,1000,5000,10000,50000,100000,1000000];
+const TIERS=['mid','mid','mid','mid','hard','hard','hard','hard','hard','hard'];
+const LV={easy:'سهل',mid:'متوسط',hard:'صعب'},LET=['أ','ب','ج','د'];
+const fmt=n=>n.toLocaleString('ar-EG');
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+let pools,step,cur,timer,left,locked,lifeUsed;
+const won=()=>step?PRIZES[step-1]:0;
+const safe=()=>step>=8?PRIZES[7]:step>=5?PRIZES[4]:0;
+let ac=null,muted=false,beatT=null,beatN=0;
+function audio(){if(!ac){try{ac=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(ac&&ac.state==='suspended')ac.resume();return ac;}
+function tone(f,d,type,vol,when){if(!ac||muted)return;const t=ac.currentTime+(when||0),o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d);}
+function beat(){clearTimeout(beatT);if(locked||!ac)return;const hi=left<=10,acc=beatN%4===0;tone(acc?(hi?880:660):(hi?740:520),.07,'square',.04);if(acc)tone(hi?110:82,.12,'sine',.12);beatN++;beatT=setTimeout(beat,left>20?700:left>10?520:left>5?340:200);}
+function stopBeat(){clearTimeout(beatT);}
+function sfx(ok){if(ok){tone(660,.12,'sine',.1);tone(880,.22,'sine',.1,.12);}else tone(180,.45,'sawtooth',.08);}
+function show(on){$('topicSetup').hidden=on;$('million').hidden=!on;}
+function begin(){audio();pools={easy:shuf(BANK.easy),mid:shuf(BANK.mid),hard:shuf(BANK.hard)};step=0;lifeUsed=false;$('mLife').disabled=false;$('mEnd').hidden=true;$('mPlay').hidden=false;load();}
+function load(){
+  const t=TIERS[step],q=pools[t].pop();
+  cur=shuf(q.slice(1).map((x,i)=>({t:x,ok:i===0})));
+  locked=false;
+  $('mNum').textContent=fmt(step+1);$('mWon').textContent=fmt(won());$('mLevel').textContent=LV[t];$('mPrize').textContent=fmt(PRIZES[step]);$('mQ').textContent=q[0];
+  const box=$('mOpts');box.innerHTML='';
+  cur.forEach((o,i)=>{const b=document.createElement('button');b.type='button';b.className='m-opt';const l=document.createElement('b');l.textContent=LET[i];const sp=document.createElement('span');sp.textContent=o.t;b.append(l,sp);b.onclick=()=>pick(i);box.append(b);});
+  clearInterval(timer);left=30;tick();timer=setInterval(()=>{left--;tick();if(left<=0)timeUp();},1000);
+  stopBeat();beatN=0;beat();
+}
+function tick(){$('mTime').textContent=fmt(left);$('mTime').classList.toggle('warn',left<=10);const bar=$('mBar');bar.style.width=(left/30*100)+'%';}
+function reveal(i){[...$('mOpts').children].forEach((b,k)=>{b.disabled=true;if(cur[k].ok)b.classList.add('ok');else if(k===i)b.classList.add('bad');});}
+function pick(i){
+  if(locked)return;locked=true;clearInterval(timer);stopBeat();reveal(i);sfx(cur[i].ok);
+  if(cur[i].ok){step++;setTimeout(()=>step===10?end(true,''):load(),1300);}
+  else setTimeout(()=>end(false,'إجابة خاطئة.'),1600);
+}
+function timeUp(){if(locked)return;locked=true;clearInterval(timer);stopBeat();reveal(-1);sfx(false);setTimeout(()=>end(false,'انتهى الوقت.'),1600);}
+function end(win,why,quit){
+  clearInterval(timer);stopBeat();$('mPlay').hidden=true;$('mEnd').hidden=false;
+  const f=win?PRIZES[9]:quit?won():safe();
+  $('mTitle').textContent=win?'🏆 مبروك! ربحت المليون':quit?'انسحبت بنقاطك':'انتهت اللعبة';
+  $('mMsg').textContent=win?'أجبت عن الأسئلة العشرة كلها بحنكة كروية حقيقية.':quit?'قررت الانسحاب والاحتفاظ بنقاطك.':why+' وصلت إلى السؤال '+fmt(step+1)+'، وتحتفظ بآخر نقطة أمان.';
+  $('mFinal').textContent=fmt(f)+' نقطة';
+}
+function life(){
+  if(lifeUsed||locked)return;lifeUsed=true;$('mLife').disabled=true;load();
+}
+$('millionLaunch').onclick=()=>{show(true);begin();};
+$('mAgain').onclick=begin;
+$('mBack').onclick=()=>{clearInterval(timer);stopBeat();show(false);};
+$('mMute').onclick=()=>{muted=!muted;$('mMute').textContent=muted?'🔇 الصوت':'🔊 الصوت';if(muted)stopBeat();else{audio();if(!locked)beat();}};
+$('mLife').onclick=life;
+$('mQuit').onclick=()=>{if(!locked&&step>0||!locked){locked=true;end(false,'',true);}};
+})();
+</script>
 </body>
 </html>
 
