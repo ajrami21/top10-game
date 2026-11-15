@@ -49,6 +49,7 @@
     .m-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}@media(max-width:560px){.m-opts{grid-template-columns:1fr}}
     .m-opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;background:#1b2b39;color:var(--text);padding:13px 14px;text-align:right;font-size:14px}.m-opt b{flex:none;width:26px;height:26px;border-radius:9px;background:#2b4054;color:var(--gold);display:grid;place-items:center;font-size:12px}.m-opt:hover:not(:disabled){border-color:var(--teal)}.m-opt.ok{background:#2e5a45;border-color:#6fcf97}.m-opt.bad{background:#5a3040;border-color:var(--coral)}.m-opt:disabled{cursor:default}
     .m-note{font-size:11px;color:var(--muted);margin:14px 0 0}.m-end h2{margin:6px 0}.m-final{font-size:34px;font-weight:800;color:var(--gold);margin:6px 0 18px}
+    .m-home{margin:0 0 4px}
   </style>
 </head>
 <body>
@@ -93,6 +94,7 @@
     <section class="million" id="million" hidden aria-labelledby="mTitle">
       <div class="eyebrow"><span class="dot"></span> حنكة كروية · طور المليون</div>
       <div id="mPlay">
+        <button class="skip-question m-home" id="mHome" type="button">→ القائمة الرئيسية</button>
         <div class="m-top"><span>السؤال <b id="mNum">١</b> من ١٠</span><span>نقاطك <b id="mWon">٠</b></span><span class="m-time" id="mTime">30</span></div>
         <div class="m-bar"><i id="mBar"></i></div>
         <div class="question"><div class="q-label"><span id="mLevel">سهل</span><span>قيمة السؤال <b id="mPrize"></b></span></div><div class="q-text" id="mQ"></div></div>
@@ -893,7 +895,7 @@ const TIERS=['mid','mid','mid','mid','hard','hard','hard','hard','hard','hard'];
 const LV={easy:'سهل',mid:'متوسط',hard:'صعب'},LET=['أ','ب','ج','د'];
 const fmt=n=>n.toLocaleString('ar-EG');
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-let pools,step,cur,timer,left,locked,lifeUsed;
+let pools,step,cur,timer,left,locked,lifeUsed,active=false;
 const won=()=>step?PRIZES[step-1]:0;
 const safe=()=>step>=8?PRIZES[7]:step>=5?PRIZES[4]:0;
 let ac=null,muted=false,beatT=null,beatN=0;
@@ -903,8 +905,9 @@ function beat(){clearTimeout(beatT);if(locked||!ac)return;const hi=left<=10,acc=
 function stopBeat(){clearTimeout(beatT);}
 function sfx(ok){if(ok){tone(660,.12,'sine',.1);tone(880,.22,'sine',.1,.12);}else tone(180,.45,'sawtooth',.08);}
 function show(on){$('topicSetup').hidden=on;$('million').hidden=!on;}
-function begin(){audio();pools={easy:shuf(BANK.easy),mid:shuf(BANK.mid),hard:shuf(BANK.hard)};step=0;lifeUsed=false;$('mLife').disabled=false;$('mEnd').hidden=true;$('mPlay').hidden=false;load();}
+function begin(){audio();active=true;pools={easy:shuf(BANK.easy),mid:shuf(BANK.mid),hard:shuf(BANK.hard)};step=0;lifeUsed=false;$('mLife').disabled=false;$('mEnd').hidden=true;$('mPlay').hidden=false;load();}
 function load(){
+  if(!active)return;
   const t=TIERS[step],q=pools[t].pop();
   cur=shuf(q.slice(1).map((x,i)=>({t:x,ok:i===0})));
   locked=false;
@@ -923,6 +926,7 @@ function pick(i){
 }
 function timeUp(){if(locked)return;locked=true;clearInterval(timer);stopBeat();reveal(-1);sfx(false);setTimeout(()=>end(false,'انتهى الوقت.'),1600);}
 function end(win,why,quit){
+  if(!active)return;
   clearInterval(timer);stopBeat();$('mPlay').hidden=true;$('mEnd').hidden=false;
   const f=win?PRIZES[9]:quit?won():safe();
   $('mTitle').textContent=win?'🏆 مبروك! ربحت المليون':quit?'انسحبت بنقاطك':'انتهت اللعبة';
@@ -934,7 +938,9 @@ function life(){
 }
 $('millionLaunch').onclick=()=>{show(true);begin();};
 $('mAgain').onclick=begin;
-$('mBack').onclick=()=>{clearInterval(timer);stopBeat();show(false);};
+function home(){active=false;clearInterval(timer);stopBeat();show(false);}
+$('mBack').onclick=home;
+$('mHome').onclick=()=>{if(confirm('الرجوع للقائمة الرئيسية سينهي الجولة الحالية. هل أنت متأكد؟'))home();};
 $('mMute').onclick=()=>{muted=!muted;$('mMute').textContent=muted?'🔇 الصوت':'🔊 الصوت';if(muted)stopBeat();else{audio();if(!locked)beat();}};
 $('mLife').onclick=life;
 $('mQuit').onclick=()=>{if(!locked&&step>0||!locked){locked=true;end(false,'',true);}};
