@@ -170,7 +170,7 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   const pathname = decodeURIComponent(url.pathname);
   try {
-    if (req.method === 'GET' && (pathname === '/' || pathname === '/index.html')) {
+    if ((req.method === 'GET' || req.method === 'HEAD') && (pathname === '/' || pathname === '/index.html')) {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
       fs.createReadStream(PAGE).pipe(res);
       return;
