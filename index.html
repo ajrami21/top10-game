@@ -50,6 +50,7 @@
     .m-opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;background:#1b2b39;color:var(--text);padding:13px 14px;text-align:right;font-size:14px}.m-opt b{flex:none;width:26px;height:26px;border-radius:9px;background:#2b4054;color:var(--gold);display:grid;place-items:center;font-size:12px}.m-opt:hover:not(:disabled){border-color:var(--teal)}.m-opt.ok{background:#2e5a45;border-color:#6fcf97}.m-opt.bad{background:#5a3040;border-color:var(--coral)}.m-opt:disabled{cursor:default}
     .m-note{font-size:11px;color:var(--muted);margin:14px 0 0}.m-end h2{margin:6px 0}.m-final{font-size:34px;font-weight:800;color:var(--gold);margin:6px 0 18px}
     .m-home{margin:0 0 4px}
+    .home-btn{display:inline-block;margin:0 0 10px;border-color:var(--line);color:var(--text)}
   </style>
 </head>
 <body>
@@ -77,6 +78,7 @@
     </section>
     <main class="layout" id="gameLayout" hidden>
       <section class="main" aria-labelledby="title">
+        <button class="skip-question home-btn" id="homeBtn" type="button">→ القائمة الرئيسية</button>
         <div class="eyebrow"><span class="dot"></span> الجولة الأولى <span>·</span> السؤال <span id="questionNumber">١</span> من <span id="roundQuestionTotal">٥</span><span class="mode-pill" id="modePill">فردي</span></div>
         <div class="room-banner" id="roomBanner" hidden><span>الغرفة <strong id="activeRoomCode" dir="ltr"></strong></span><span id="activePlayers"></span></div>
         <h1 class="title" id="title">تحدّي كرة القدم</h1>
@@ -755,6 +757,7 @@
       $('skipQuestion').addEventListener('click',()=>{if(found.size===answers.length||mistakes>=5)return;if(room){performRoomAction('reveal');return}mistakes=5;$('finished').textContent=`تم إظهار الإجابات واستهلاك فرص السؤال. حصلت على ${questionPoints} نقطة.`;$('finished').classList.add('show');message('ظهرت الإجابات ويمكنك متابعة الجولة.','neutral');render()});
       $('startGame').addEventListener('click',beginGame);
       $('playAgain').addEventListener('click',resetToSetup);
+      $('homeBtn').addEventListener('click',()=>{if(confirm(room?'الرجوع للقائمة الرئيسية سيُخرجك من الغرفة وتنتهي جولتك. هل أنت متأكد؟':'الرجوع للقائمة الرئيسية سينهي الجولة الحالية. هل أنت متأكد؟'))resetToSetup()});
       render();
       try{const saved=JSON.parse(sessionStorage.getItem(roomSessionKey)||'null');if(saved?.code&&saved?.token){room=saved;selectedMode='duo';$('playerOneName').value=saved.name||'';chooseMode('duo');roomRevision=-1;lastRoomEventRevision=0;roomSetupWaiting(saved.code,'جارٍ استعادة الغرفة…');beginRoomPolling()}}catch(_){}
     })();
