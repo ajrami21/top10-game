@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="حنكة كروية — تحدّي كرة القدم">
   <meta name="twitter:description" content="خمّن الإجابات الكروية المخفية، اكسب نقاطاً، وتحدَّ صديقك عن بُعد.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%BD%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox=%220 0 96 96%22 xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22%3E%3Cdefs%3E%3CclipPath id=%22hbC%22%3E%3Ccircle cx=%2248%22 cy=%2248%22 r=%2241%22/%3E%3C/clipPath%3E%3C/defs%3E%3Ccircle cx=%2248%22 cy=%2248%22 r=%2245%22 fill=%22%2316232f%22 stroke=%22%23e4c66d%22 stroke-width=%222%22/%3E%3Ccircle cx=%2248%22 cy=%2248%22 r=%2241%22 fill=%22%23f1ecdf%22/%3E%3Cg clip-path=%22url(%23hbC)%22 fill=%22%2316232f%22 stroke=%22%2316232f%22 stroke-width=%222.4%22 stroke-linejoin=%22round%22 stroke-linecap=%22round%22%3E%3Cpolygon points=%2248.0,36.0 59.4,44.3 55.1,57.7 40.9,57.7 36.6,44.3%22/%3E%3Cpolygon points=%2248.0,24.0 36.6,15.7 40.9,2.3 55.1,2.3 59.4,15.7%22/%3E%3Cpolygon points=%2270.8,40.6 75.2,27.2 89.3,27.2 93.7,40.6 82.2,48.9%22/%3E%3Cpolygon points=%2262.1,67.4 76.2,67.4 80.6,80.8 69.2,89.1 57.7,80.8%22/%3E%3Cpolygon points=%2233.9,67.4 38.3,80.8 26.8,89.1 15.4,80.8 19.8,67.4%22/%3E%3Cpolygon points=%2225.2,40.6 13.8,48.9 2.3,40.6 6.7,27.2 20.8,27.2%22/%3E%3Cpath d=%22M48.0,36.0L48.0,24.0M59.4,44.3L70.8,40.6M55.1,57.7L62.1,67.4M40.9,57.7L33.9,67.4M36.6,44.3L25.2,40.6M36.6,15.7L82.2,48.9M75.2,27.2L57.7,80.8M76.2,67.4L19.8,67.4M38.3,80.8L20.8,27.2M13.8,48.9L59.4,15.7%22 fill=%22none%22/%3E%3C/g%3E%3Ccircle cx=%2248%22 cy=%2248%22 r=%2241%22 stroke=%22%2316232f%22 stroke-opacity=%22.35%22 stroke-width=%221%22/%3E%3C/svg%3E">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"حنكة كروية","alternateName":"TOP 10 - أجرامي","description":"لعبة عربية لتحدّي كرة القدم: خمّن الإجابات المخفية في قوائم TOP 10 واكسب نقاطاً.","applicationCategory":"GameApplication","inLanguage":"ar","author":{"@type":"Person","name":"AJRAMI"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800&display=swap');
@@ -48,22 +48,68 @@
     .m-bar{height:6px;border-radius:6px;background:#1b2b39;overflow:hidden}.m-bar i{display:block;height:100%;width:100%;background:var(--teal);transition:width 1s linear}
     .m-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}@media(max-width:560px){.m-opts{grid-template-columns:1fr}}
     .m-opt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;background:#1b2b39;color:var(--text);padding:13px 14px;text-align:right;font-size:14px}.m-opt b{flex:none;width:26px;height:26px;border-radius:9px;background:#2b4054;color:var(--gold);display:grid;place-items:center;font-size:12px}.m-opt:hover:not(:disabled){border-color:var(--teal)}.m-opt.ok{background:#2e5a45;border-color:#6fcf97}.m-opt.bad{background:#5a3040;border-color:var(--coral)}.m-opt:disabled{cursor:default}
-    .m-note{font-size:11px;color:var(--muted);margin:14px 0 0}.m-end h2{margin:6px 0}.m-final{font-size:34px;font-weight:800;color:var(--gold);margin:6px 0 18px}
+    .m-end h2{margin:6px 0}.m-final{font-size:34px;font-weight:800;color:var(--gold);margin:6px 0 18px}
     .m-home{margin:0 0 4px}
     .home-btn{display:inline-block;margin:0 0 10px;border-color:var(--line);color:var(--text)}
+    .home{text-align:center;padding:clamp(30px,7vw,64px) clamp(20px,5vw,40px);margin-bottom:18px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(37,53,70,.98),rgba(29,43,58,.98));border-radius:26px;box-shadow:0 22px 60px #07101355}.home[hidden],body:has(#topicSetup:not([hidden])) .home,body:has(#gameLayout:not([hidden])) .home,body:has(#million:not([hidden])) .home{display:none}
+    .home .eyebrow{justify-content:center}.home h1{font-size:clamp(34px,7vw,54px);margin:10px 0 8px;letter-spacing:-.03em}.home p{color:var(--muted);margin:0 auto 26px;max-width:420px;line-height:1.7}.home-ball{width:96px;height:96px;margin:0 auto 14px;filter:drop-shadow(0 10px 22px #0007)}.home-ball svg{width:100%;height:100%;display:block}
+    .home-start{border:0;border-radius:18px;background:var(--teal);color:#283345;font-weight:800;font-size:24px;padding:14px 64px;box-shadow:0 10px 28px #e4c66d44}.home-start:hover{background:#efd98a;transform:translateY(-2px)}
+    .home-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:24px}.home-tags span{border:1px solid var(--line);border-radius:20px;background:#1b2b39;padding:5px 12px;font-size:12px;color:var(--muted)}
+    .home-link{margin:0 0 10px}.mode-picker{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:620px){.mode-picker{grid-template-columns:1fr}}.mode-million{border-color:#e4c66d66}.mode-million strong{color:var(--gold)}
+    .comp{border:1px solid var(--line);border-radius:16px;background:#1b2b3966;padding:14px;margin:0 0 18px}.comp[hidden]{display:none}.comp-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:10px}.comp-head span{color:var(--gold);font-size:12px}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);border-radius:20px;background:#1b2b39;color:var(--text);padding:7px 14px;font-size:13px}.chip[aria-pressed="true"]{border-color:var(--teal);background:#354653;color:var(--gold)}.comp-note{font-size:11px;color:var(--muted);margin:10px 0 0}
+    .home-ball{width:150px;height:150px}body:has(#nameGate:not([hidden])) .home{display:none}
+    .setup-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.who{font-size:13px;color:var(--muted)}.who b{color:var(--gold)}.linklike{border:0;background:none;color:var(--teal);text-decoration:underline;padding:0;font-size:12px}
+    .has-name #playerFields>.player-field:first-child,.has-name #nameNote{display:none}.gate .player-field{margin:16px 0 8px}
+    .share{margin-top:20px}.share-main{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--teal);border-radius:22px;background:#1b2b39;color:var(--gold);padding:9px 20px;font-size:14px;font-weight:700}.share-main:hover{background:#354653}.share-menu{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.share-menu[hidden]{display:none}.share-btn{border:1px solid var(--line);border-radius:20px;background:#1b2b39;color:var(--text);padding:7px 14px;font-size:13px;text-decoration:none}.share-btn:hover{border-color:var(--teal);color:var(--gold)}.home .share{text-align:center}.home .share-menu{justify-content:center}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header class="topbar"><div class="brand"><div class="brandmark">١٠</div><span>حنكة كروية</span></div><div class="signature" aria-label="AJRAMI"><span class="signature-mark">A</span><span class="signature-name">AJRAMI</span></div></header>
-    <section class="setup" id="topicSetup" aria-labelledby="setupTitle">
-      <div class="eyebrow"><span class="dot"></span> حنكة كروية · تحدّي TOP 10</div>
-      <h1 id="setupTitle">ابدأ جولتك الكروية</h1>
-      <p>خمّن الإجابات الكروية المخفية، واكسب نقاطاً مع كل إجابة صحيحة.</p>
-      <div class="mode-picker" id="modePicker" role="group" aria-label="اختر نمط اللعب">
-        <button class="mode-option" id="soloMode" type="button" aria-pressed="true"><strong>فردي</strong><span>العب وحدك</span></button>
-        <button class="mode-option" id="duoMode" type="button" aria-pressed="false"><strong>ثنائي عن بُعد</strong><span>كل لاعب على جهازه، برمز غرفة</span></button>
+    <section class="home" id="homeScreen" aria-labelledby="homeTitle">
+      <div class="home-ball" aria-hidden="true">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <defs><path id="hbT" d="M20,80a60,60 0 0 1 120,0"/><path id="hbU" d="M12,80a68,68 0 0 0 136,0"/><radialGradient id="hbB" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#ece7d8"/><stop offset="1" stop-color="#c9c2ae"/></radialGradient><clipPath id="hbC"><circle cx="48" cy="48" r="41"/></clipPath></defs>
+          <circle cx="80" cy="80" r="77" fill="#101b25" stroke="#e4c66d" stroke-width="2"/>
+          <circle cx="80" cy="80" r="50" stroke="#e4c66d" stroke-opacity=".35" stroke-width="1"/>
+          <g transform="translate(32 32)">
+          <circle cx="48" cy="48" r="45" fill="#16232f" stroke="#e4c66d" stroke-width="2"/>
+          <circle cx="48" cy="48" r="41" fill="url(#hbB)"/>
+          <g clip-path="url(#hbC)" fill="#16232f" stroke="#16232f" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+            <polygon points="48.0,36.0 59.4,44.3 55.1,57.7 40.9,57.7 36.6,44.3"/>
+            <polygon points="48.0,24.0 36.6,15.7 40.9,2.3 55.1,2.3 59.4,15.7"/><polygon points="70.8,40.6 75.2,27.2 89.3,27.2 93.7,40.6 82.2,48.9"/><polygon points="62.1,67.4 76.2,67.4 80.6,80.8 69.2,89.1 57.7,80.8"/><polygon points="33.9,67.4 38.3,80.8 26.8,89.1 15.4,80.8 19.8,67.4"/><polygon points="25.2,40.6 13.8,48.9 2.3,40.6 6.7,27.2 20.8,27.2"/>
+            <path d="M48.0,36.0L48.0,24.0M59.4,44.3L70.8,40.6M55.1,57.7L62.1,67.4M40.9,57.7L33.9,67.4M36.6,44.3L25.2,40.6M36.6,15.7L82.2,48.9M75.2,27.2L57.7,80.8M76.2,67.4L19.8,67.4M38.3,80.8L20.8,27.2M13.8,48.9L59.4,15.7" fill="none"/>
+          </g>
+          <circle cx="48" cy="48" r="41" stroke="#16232f" stroke-opacity=".35" stroke-width="1"/>
+        </g>
+          <g fill="#e4c66d" font-weight="800" letter-spacing="3.2" text-anchor="middle" font-family="inherit">
+            <text font-size="12"><textPath href="#hbT" startOffset="50%">AJRAMI</textPath></text>
+            <text font-size="11" letter-spacing="2.6"><textPath href="#hbU" startOffset="50%">FOOTBALL SAVVY</textPath></text>
+            <circle cx="16" cy="80" r="2.4"/><circle cx="144" cy="80" r="2.4"/>
+          </g>
+        </svg>
       </div>
+      <h1 id="homeTitle">حنكة كروية</h1>
+      <p>خمّن الإجابات الكروية المخفية، وتعاون مع صديقك، أو تسلّق إلى القمّة.</p>
+      <button class="home-start" id="homeStart" type="button">ابدأ</button>
+      <div class="home-tags"><span>🎯 فردي</span><span>🤝 ثنائي عن بُعد</span><span>🏆 طور القمّة</span></div>
+      <div class="share" data-share><button class="share-main" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg>مشاركة</button><div class="share-menu" hidden></div></div>
+    </section>
+    <section class="setup gate" id="nameGate" aria-labelledby="gateTitle" hidden>
+      <h1 id="gateTitle">اختر اسمك</h1>
+      <div class="player-field"><label for="gateName">اسم اللاعب</label><input id="gateName" type="text" maxlength="24" autocomplete="off" placeholder="اكتب اسمك"></div>
+      <p class="name-error" id="gateErr" role="alert" hidden>أدخل اسمك للمتابعة.</p>
+      <button class="setup-start" id="gateSave" type="button">متابعة ←</button>
+    </section>
+    <section class="setup" id="topicSetup" aria-labelledby="setupTitle" hidden>
+      <div class="setup-top"><button class="skip-question" id="toHome" type="button">→ الرئيسية</button><span class="who">مرحباً، <b id="helloName"></b> · <button class="linklike" id="changeName" type="button">تغيير</button></span></div>
+      <h1 id="setupTitle">اختر طور اللعب</h1>
+      <div class="mode-picker" id="modePicker" role="group" aria-label="اختر نمط اللعب">
+        <button class="mode-option" id="soloMode" type="button" aria-pressed="true"><strong>🎯 فردي</strong><span>العب وحدك</span></button>
+        <button class="mode-option" id="duoMode" type="button" aria-pressed="false"><strong>🤝 ثنائي عن بُعد</strong><span>كل لاعب على جهازه، برمز غرفة</span></button>
+        <button class="mode-option mode-million" id="millionLaunch" type="button"><strong>🏆 طور القمّة</strong><span>10 أسئلة بأربعة خيارات · 30 ثانية</span></button>
+      </div>
+      <div class="comp" id="compBox"><div class="comp-head"><b>اختر البطولات</b><span id="compCount">الكل</span></div><div class="chips" id="chips"></div></div>
       <div class="players-grid" id="playerFields">
         <div class="player-field"><label for="playerOneName" id="playerOneLabel">اسم اللاعب</label><input id="playerOneName" type="text" maxlength="24" autocomplete="off" placeholder="اكتب الاسم"></div>
         <div class="room-access" id="roomAccess" hidden><button class="room-choice selected" id="createRoomMode" type="button" aria-pressed="true">إنشاء غرفة</button><button class="room-choice" id="joinRoomMode" type="button" aria-pressed="false">الانضمام برمز</button></div>
@@ -73,7 +119,7 @@
       <p id="nameError" class="name-error" role="alert" hidden>أدخل اسم اللاعب للمتابعة.</p>
       <p id="deckNotice" role="status" hidden>استخدمت كل الأسئلة الجديدة المتاحة في هذا التصفح.</p>
       <button class="setup-start" id="startGame" type="button">ابدأ اللعب ←</button>
-      <button class="million-launch" id="millionLaunch" type="button"><strong>🏆 طور المليون</strong><span>10 أسئلة من المتوسط إلى الصعب · 30 ثانية لكل سؤال · وسيلة مساعدة واحدة</span></button>
+      <div class="share" data-share><button class="share-main" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg>مشاركة</button><div class="share-menu" hidden></div></div>
       <div class="room-lobby" id="roomLobby" hidden><div><span id="roomLobbyTitle">رمز الغرفة</span><strong id="createdRoomCode" dir="ltr">------</strong></div><button class="room-copy" id="copyRoomCode" type="button" aria-label="نسخ رمز الغرفة">نسخ الرمز</button><p id="lobbyStatus" role="status">بانتظار اللاعب الثاني…</p></div>
     </section>
     <main class="layout" id="gameLayout" hidden>
@@ -94,7 +140,7 @@
       <aside class="side summary" id="summary"><h2>ملخّص الجولة</h2><p id="roundStatus">جولة كروية متنوعة</p><div class="scorebox"><div class="scoreline"><span id="scoreLabel">مجموع النقاط</span><span class="score" id="score">٠</span></div><div class="progress"><i id="progress"></i></div></div><div class="roundscore">أكملت <strong id="completedCount">٠</strong> من <span id="roundTotal">٠</span> أسئلة</div><button class="next-question" id="playAgain" type="button">العودة للبداية ↻</button></aside>
     </main>
     <section class="million" id="million" hidden aria-labelledby="mTitle">
-      <div class="eyebrow"><span class="dot"></span> حنكة كروية · طور المليون</div>
+      <div class="eyebrow"><span class="dot"></span> حنكة كروية · طور القمّة</div>
       <div id="mPlay">
         <button class="skip-question m-home" id="mHome" type="button">→ القائمة الرئيسية</button>
         <div class="m-top"><span>السؤال <b id="mNum">١</b> من ١٠</span><span>نقاطك <b id="mWon">٠</b></span><span class="m-time" id="mTime">30</span></div>
@@ -102,7 +148,6 @@
         <div class="question"><div class="q-label"><span id="mLevel">سهل</span><span>قيمة السؤال <b id="mPrize"></b></span></div><div class="q-text" id="mQ"></div></div>
         <div class="m-opts" id="mOpts"></div>
         <div class="actions"><button class="skip-question" id="mLife" type="button">🔄 تغيير السؤال (مرة واحدة)</button><button class="skip-question" id="mMute" type="button">🔊 الصوت</button><button class="next-question" id="mQuit" type="button">انسحاب بنقاطي</button></div>
-        <p class="m-note">نقطتا أمان: عند إكمال السؤال ٥ والسؤال ٨. الإجابة الخاطئة أو انتهاء الوقت تعيدك لآخر نقطة أمان.</p>
       </div>
       <div id="mEnd" class="m-end" hidden><h2 id="mTitle">النتيجة</h2><p id="mMsg"></p><div class="m-final" id="mFinal"></div><div class="actions"><button class="setup-start" id="mAgain" type="button">العب مرة أخرى ↻</button><button class="next-question" id="mBack" type="button">رجوع للقائمة</button></div></div>
     </section>
@@ -695,7 +740,10 @@
       const deckStore=(()=>{try{return window.localStorage||sessionStorage}catch(_){return sessionStorage}})();
       const usedQuestionIndexes=(()=>{try{return new Set(JSON.parse(deckStore.getItem(deckStorageKey)||'[]').filter(i=>Number.isInteger(i)&&i>=0&&i<questions.length))}catch(_){return new Set()}})();
       function saveUsed(){try{deckStore.setItem(deckStorageKey,JSON.stringify([...usedQuestionIndexes]))}catch(_){}}
-      function shuffledQuestions(){const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};let selected=shuf(questions.map((_,i)=>i).filter(i=>!usedQuestionIndexes.has(i))).slice(0,5);if(selected.length<5){usedQuestionIndexes.clear();selected=selected.concat(shuf(questions.map((_,i)=>i).filter(i=>!selected.includes(i))).slice(0,5-selected.length))}selected.forEach(i=>usedQuestionIndexes.add(i));saveUsed();return selected}
+      const CATS=[['كأس العالم','كأس العالم'],['دوري أبطال أوروبا','دوري الأبطال'],['الدوري الإنجليزي الممتاز','الإنجليزي'],['الدوري الإسباني','الإسباني'],['الدوري الإيطالي','الإيطالي']],selectedCats=new Set(CATS.map(c=>c[0]));
+      function drawChips(){const box=$('chips'),all=selectedCats.size===CATS.length;box.innerHTML='';const mk=(l,on,fn)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('aria-pressed',String(on));b.textContent=l;b.onclick=fn;box.append(b)};mk('الكل',all,()=>{CATS.forEach(c=>selectedCats.add(c[0]));drawChips()});CATS.forEach(([k,l])=>mk(l,!all&&selectedCats.has(k),()=>{if(all){selectedCats.clear();selectedCats.add(k)}else if(selectedCats.has(k)){if(selectedCats.size>1)selectedCats.delete(k)}else selectedCats.add(k);drawChips()}));$('compCount').textContent=all?'الكل':selectedCats.size+' من '+CATS.length}
+      drawChips();
+      function shuffledQuestions(){const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};const allowed=questions.map((_,i)=>i).filter(i=>selectedCats.has(questions[i].category));let selected=shuf(allowed.filter(i=>!usedQuestionIndexes.has(i))).slice(0,5);if(selected.length<5){allowed.forEach(i=>usedQuestionIndexes.delete(i));selected=selected.concat(shuf(allowed.filter(i=>!selected.includes(i))).slice(0,5-selected.length))}selected.forEach(i=>usedQuestionIndexes.add(i));saveUsed();return selected}
       function currentQuestion(){return roomQuestionDeck?.[roundStep]||questions[questionIndex]}
       function roundMaxPoints(){return roundOrder.reduce((total,index,k)=>{const list=(roomQuestionDeck?.[k]||questions[index]).answers;return total+list.reduce((sum,a,i)=>sum+(a.points??Math.max(1,list.length-i)),0)},0)}
       function startRound(){roomQuestionDeck=null;roundOrder=shuffledQuestions();if(!roundOrder.length)return false;roundStep=0;questionIndex=roundOrder[0];answers=questions[questionIndex].answers;return true}
@@ -737,7 +785,7 @@
       function updateStartButton(){ $('startGame').textContent=selectedMode==='solo'?'ابدأ اللعب ←':duoEntry==='create'?'إنشاء غرفة ←':'انضم إلى الغرفة ←' }
       function chooseMode(mode){selectedMode=mode;$('soloMode').setAttribute('aria-pressed',String(mode==='solo'));$('duoMode').setAttribute('aria-pressed',String(mode==='duo'));$('roomAccess').hidden=mode!=='duo';$('roomCodeField').hidden=mode!=='duo'||duoEntry!=='join';$('playerOneLabel').textContent=mode==='duo'?'اسمك':'اسم اللاعب';$('nameNote').textContent=mode==='duo'?'اكتب اسمك؛ لا حاجة إلى إنشاء حساب.':'لا حاجة إلى حساب؛ سيظهر اسمك بجانب نتيجتك.';updateStartButton()}
       function chooseDuoEntry(entry){duoEntry=entry;$('createRoomMode').setAttribute('aria-pressed',String(entry==='create'));$('joinRoomMode').setAttribute('aria-pressed',String(entry==='join'));$('roomCodeField').hidden=selectedMode!=='duo'||entry!=='join';updateStartButton()}
-      function roomSetupWaiting(code,status){$('modePicker').hidden=true;$('playerFields').hidden=true;$('nameNote').hidden=true;$('nameError').hidden=true;$('startGame').hidden=true;$('roomLobby').hidden=false;$('createdRoomCode').textContent=code;$('lobbyStatus').textContent=status}
+      function roomSetupWaiting(code,status){$('compBox').hidden=true;$('modePicker').hidden=true;$('playerFields').hidden=true;$('nameNote').hidden=true;$('nameError').hidden=true;$('startGame').hidden=true;$('roomLobby').hidden=false;$('createdRoomCode').textContent=code;$('lobbyStatus').textContent=status}
       async function roomRequest(path,method='GET',body){const response=await fetch('/api/'+path,{method,headers:body?{'Content-Type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined,cache:'no-store'});const data=await response.json().catch(()=>({error:'تعذر قراءة استجابة الخادم.'}));if(!response.ok)throw new Error(data.error||'تعذر الاتصال بالغرفة.');return data}
       function persistRoom(){try{if(room)sessionStorage.setItem(roomSessionKey,JSON.stringify(room));else sessionStorage.removeItem(roomSessionKey)}catch(_){}}
       function applyRoomSnapshot(snapshot){try{(snapshot.questionIndexes||[]).forEach(i=>{if(Number.isInteger(i)&&i>=0&&i<questions.length)usedQuestionIndexes.add(i)});saveUsed()}catch(_){}if(!snapshot||snapshot.revision<roomRevision)return;const changed=snapshot.revision>roomRevision;roomRevision=snapshot.revision;room.code=snapshot.code;playerNames=(snapshot.players||[]).map(player=>player.name);roomQuestionDeck=snapshot.questions||roomQuestionDeck;roundOrder=snapshot.questionIndexes||roundOrder;if(roundOrder.some(index=>!usedQuestionIndexes.has(index))){roundOrder.forEach(index=>usedQuestionIndexes.add(index));try{sessionStorage.setItem(deckStorageKey,JSON.stringify([...usedQuestionIndexes]))}catch(_){}}roundStep=snapshot.roundStep||0;questionIndex=roundOrder[roundStep]??questionIndex;answers=roomQuestionDeck?.[roundStep]?.answers||questions[questionIndex].answers;found.clear();(snapshot.found||[]).forEach(i=>found.add(i));mistakes=snapshot.mistakes||0;questionPoints=snapshot.questionPoints||0;totalPoints=snapshot.totalPoints||0;roundFinished=snapshot.phase==='finished';selectedMode='duo';$('roomBanner').hidden=false;$('activeRoomCode').textContent=snapshot.code;$('activePlayers').textContent=playerNames.join(' + ');$('scoreLabel').textContent=`نقاط ${playerNames.join(' و ')}`;
@@ -748,7 +796,7 @@
       function beginRoomPolling(){if(roomPollTimer)clearInterval(roomPollTimer);pollRoom();roomPollTimer=setInterval(pollRoom,1000)}
       async function performRoomAction(type,value=''){if(!room)return;try{const state=await roomRequest(`rooms/${encodeURIComponent(room.code)}/actions`,'POST',{token:room.token,type,value});applyRoomSnapshot(state)}catch(error){message(error.message,'neutral')}}
       async function beginGame(){const name=$('playerOneName').value.trim();if(!name){$('nameError').textContent='أدخل اسمك للمتابعة.';$('nameError').hidden=false;$('playerOneName').focus();return}if(selectedMode==='solo'){playerNames=[name];if(!startRound()){$('deckNotice').hidden=false;$('startGame').disabled=true;$('startGame').textContent='استخدمت كل الأسئلة';return}found.clear();mistakes=0;questionPoints=0;totalPoints=0;roundFinished=false;$('scoreLabel').textContent=`نقاط ${name}`;$('deckNotice').hidden=true;$('finished').classList.remove('show');$('finished').textContent='';$('answer').value='';$('feedback').className='feedback';$('topicSetup').hidden=true;$('gameLayout').hidden=false;render();window.scrollTo({top:0,behavior:'smooth'});return}if(location.protocol==='file:'){ $('nameError').textContent='اللعب عن بُعد يحتاج فتح اللعبة عبر رابط الخادم.';$('nameError').hidden=false;return }$('nameError').hidden=true;try{if(duoEntry==='create'){if(!startRound())throw new Error('استخدمت كل الأسئلة المتاحة في هذا التصفح.');const created=await roomRequest('rooms','POST',{name,questionIndexes:roundOrder,questions:roundOrder.map(index=>questions[index])});room={code:created.code,token:created.token,name};roomRevision=-1;lastRoomEventRevision=0;persistRoom();roomSetupWaiting(room.code,'شارك الرمز مع اللاعب الثاني وانتظرا انضمامه…');applyRoomSnapshot(created.state)}else{const code=$('roomCodeInput').value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();if(code.length!==6){$('nameError').textContent='أدخل رمز الغرفة المكوّن من ستة أحرف.';$('nameError').hidden=false;return}const joined=await roomRequest(`rooms/${encodeURIComponent(code)}/join`,'POST',{name});room={code:joined.code,token:joined.token,name};roomRevision=-1;lastRoomEventRevision=0;persistRoom();roomSetupWaiting(room.code,'جارٍ الاتصال بالغرفة…');applyRoomSnapshot(joined.state)}beginRoomPolling();window.scrollTo({top:0,behavior:'smooth'})}catch(error){$('nameError').textContent=error.message;$('nameError').hidden=false}}
-      function resetToSetup(){if(roomPollTimer)clearInterval(roomPollTimer);roomPollTimer=0;room=null;roomQuestionDeck=null;roomRevision=-1;lastRoomEventRevision=0;persistRoom();$('roomBanner').hidden=true;$('gameLayout').hidden=true;$('topicSetup').hidden=false;$('modePicker').hidden=false;$('playerFields').hidden=false;$('nameNote').hidden=false;$('startGame').hidden=false;$('roomLobby').hidden=true;$('startGame').disabled=false;updateStartButton();window.scrollTo({top:0,behavior:'smooth'})}
+      function resetToSetup(){if(roomPollTimer)clearInterval(roomPollTimer);roomPollTimer=0;room=null;roomQuestionDeck=null;roomRevision=-1;lastRoomEventRevision=0;persistRoom();$('roomBanner').hidden=true;$('gameLayout').hidden=true;$('topicSetup').hidden=false;$('compBox').hidden=false;$('modePicker').hidden=false;$('playerFields').hidden=false;$('nameNote').hidden=false;$('startGame').hidden=false;$('roomLobby').hidden=true;$('startGame').disabled=false;updateStartButton();window.scrollTo({top:0,behavior:'smooth'})}
       $('soloMode').addEventListener('click',()=>chooseMode('solo'));
       $('duoMode').addEventListener('click',()=>chooseMode('duo'));
       $('createRoomMode').addEventListener('click',()=>chooseDuoEntry('create'));
@@ -759,6 +807,18 @@
       $('skipQuestion').addEventListener('click',()=>{if(found.size===answers.length||mistakes>=5)return;if(room){performRoomAction('reveal');return}mistakes=5;$('finished').textContent=`تم إظهار الإجابات واستهلاك فرص السؤال. حصلت على ${questionPoints} نقطة.`;$('finished').classList.add('show');message('ظهرت الإجابات ويمكنك متابعة الجولة.','neutral');render()});
       $('startGame').addEventListener('click',beginGame);
       $('playAgain').addEventListener('click',resetToSetup);
+      const NAME_KEY='hanka-player-name';
+      const getName=()=>{try{return(localStorage.getItem(NAME_KEY)||'').trim().slice(0,24)}catch(_){return''}};
+      function applyName(){const n=getName();$('topicSetup').classList.toggle('has-name',!!n);if(n){$('playerOneName').value=n;$('helloName').textContent=n}}
+      function gateOrSetup(){applyName();const ok=!!getName();$('nameGate').hidden=ok;$('topicSetup').hidden=!ok;if(!ok)$('gateName').focus();window.scrollTo({top:0,behavior:'smooth'})}
+      $('homeStart').addEventListener('click',gateOrSetup);
+      $('gateSave').addEventListener('click',()=>{const v=$('gateName').value.trim().slice(0,24);if(!v){$('gateErr').hidden=false;$('gateName').focus();return}$('gateErr').hidden=true;try{localStorage.setItem(NAME_KEY,v)}catch(_){}$('playerOneName').value=v;$('topicSetup').classList.add('has-name');$('helloName').textContent=v;$('nameGate').hidden=true;$('topicSetup').hidden=false});
+      $('gateName').addEventListener('keydown',e=>{if(e.key==='Enter')$('gateSave').click()});
+      $('changeName').addEventListener('click',()=>{$('gateName').value=getName();$('topicSetup').hidden=true;$('nameGate').hidden=false;$('gateName').focus()});
+      applyName();
+      document.querySelectorAll('[data-share]').forEach(box=>{const main=box.querySelector('.share-main'),menu=box.querySelector('.share-menu'),url=location.href.split('#')[0],text='حنكة كروية ⚽ تحدّي كرة القدم: خمّن الإجابات، وتعاون مع صديقك، وتسلّق إلى القمّة!',q=encodeURIComponent;const add=(l,h)=>{const a=document.createElement('a');a.className='share-btn';a.textContent=l;a.href=h;a.target='_blank';a.rel='noopener';menu.append(a)};add('واتساب','https://wa.me/?text='+q(text+' '+url));add('تيليجرام','https://t.me/share/url?url='+q(url)+'&text='+q(text));add('فيسبوك','https://www.facebook.com/sharer/sharer.php?u='+q(url));add('X','https://twitter.com/intent/tweet?text='+q(text)+'&url='+q(url));const c=document.createElement('button');c.type='button';c.className='share-btn';c.textContent='نسخ الرابط';c.onclick=()=>{const done=()=>{c.textContent='تم النسخ ✓';setTimeout(()=>c.textContent='نسخ الرابط',1600)};(navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(done).catch(()=>window.prompt('انسخ الرابط',url))};menu.append(c);const phone=!!navigator.share&&/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);main.onclick=()=>{if(phone)navigator.share({title:'حنكة كروية',text,url}).catch(()=>{});else menu.hidden=!menu.hidden}});
+      $('toHome').addEventListener('click',()=>{$('topicSetup').hidden=true});
+      ['soloMode','duoMode','createRoomMode','joinRoomMode'].forEach(id=>$(id).addEventListener('click',()=>setTimeout(()=>{$('compBox').hidden=selectedMode==='duo'&&duoEntry==='join'},0)));
       $('homeBtn').addEventListener('click',()=>{if(confirm(room?'الرجوع للقائمة الرئيسية سيُخرجك من الغرفة وتنتهي جولتك. هل أنت متأكد؟':'الرجوع للقائمة الرئيسية سينهي الجولة الحالية. هل أنت متأكد؟'))resetToSetup()});
       render();
       try{const saved=JSON.parse(sessionStorage.getItem(roomSessionKey)||'null');if(saved?.code&&saved?.token){room=saved;selectedMode='duo';$('playerOneName').value=saved.name||'';chooseMode('duo');roomRevision=-1;lastRoomEventRevision=0;roomSetupWaiting(saved.code,'جارٍ استعادة الغرفة…');beginRoomPolling()}}catch(_){}
@@ -945,7 +1005,6 @@ try{usedM=new Set(JSON.parse(localStorage.getItem(UKEY)||'[]'))}catch(e){}
 function saveM(){try{localStorage.setItem(UKEY,JSON.stringify([...usedM]))}catch(e){}}
 function mkPools(){const p={};for(const t of Object.keys(BANK)){const need=TIERS.filter(x=>x===t).length+1;let av=BANK[t].filter(q=>!usedM.has(q[0]));if(av.length<need){BANK[t].forEach(q=>usedM.delete(q[0]));av=BANK[t].slice()}p[t]=shuf(av)}saveM();return p}
 const won=()=>step?PRIZES[step-1]:0;
-const safe=()=>step>=8?PRIZES[7]:step>=5?PRIZES[4]:0;
 let ac=null,muted=false,beatT=null,beatN=0;
 function audio(){if(!ac){try{ac=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(ac&&ac.state==='suspended')ac.resume();return ac;}
 function tone(f,d,type,vol,when){if(!ac||muted)return;const t=ac.currentTime+(when||0),o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+d);}
@@ -976,9 +1035,9 @@ function timeUp(){if(locked)return;locked=true;clearInterval(timer);stopBeat();r
 function end(win,why,quit){
   if(!active)return;
   clearInterval(timer);stopBeat();$('mPlay').hidden=true;$('mEnd').hidden=false;
-  const f=win?PRIZES[9]:quit?won():safe();
-  $('mTitle').textContent=win?'🏆 مبروك! ربحت المليون':quit?'انسحبت بنقاطك':'انتهت اللعبة';
-  $('mMsg').textContent=win?'أجبت عن الأسئلة العشرة كلها بحنكة كروية حقيقية.':quit?'قررت الانسحاب والاحتفاظ بنقاطك.':why+' وصلت إلى السؤال '+fmt(step+1)+'، وتحتفظ بآخر نقطة أمان.';
+  const f=win?PRIZES[9]:quit?won():0;
+  $('mTitle').textContent=win?'🏆 مبروك! بلغت القمّة':quit?'انسحبت بنقاطك':'انتهت اللعبة';
+  $('mMsg').textContent=win?'أجبت عن الأسئلة العشرة كلها بحنكة كروية حقيقية.':quit?'قررت الانسحاب والاحتفاظ بنقاطك.':why+' وصلت إلى السؤال '+fmt(step+1)+'.';
   $('mFinal').textContent=fmt(f)+' نقطة';
 }
 function life(){
